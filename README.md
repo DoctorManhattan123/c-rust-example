@@ -28,7 +28,7 @@ make
 3. Run the project:
 
 ```
-make run
+./main
 ```
 
 The output should display "Hello from Rust!" followed by "Extern Hello from C!".

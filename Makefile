@@ -1,12 +1,15 @@
 CC = gcc
 CFLAGS = -Wall
 RUST_LIB_DIR = rust_lib/target/release
-RUST_LIB_NAME = rust_lib
+RUST_LIB_FILE = $(RUST_LIB_DIR)/librust_lib.so
 
 all: main
 
-main: rustlib
-	$(CC) $(CFLAGS) -o main main.c -L$(RUST_LIB_DIR) -Wl,-rpath,$(RUST_LIB_DIR) -l$(RUST_LIB_NAME)
+main: main.o rustlib
+	$(CC) $(CFLAGS) -o main main.o $(RUST_LIB_FILE)
+
+main.o: main.c
+	$(CC) $(CFLAGS) -c main.c
 
 rustlib:
 	cd rust_lib && cargo build --release
